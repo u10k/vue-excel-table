@@ -1,0 +1,66 @@
+@import './transition';
+body,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+fieldset,
+table,
+td,
+img,
+div,
+dl,
+dt,
+dd,
+input,
+p,
+a,
+section,
+figure,
+figcaption,
+hgroup,
+pre,
+i,
+header {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  word-break: break-all;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none !important;
+}
+
+input,
+button {
+  border: none;
+  outline: none;
+}
+
+button {
+  user-select: none;
+}
+
+i {
+  font-style: normal;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
