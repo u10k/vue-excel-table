@@ -389,9 +389,7 @@ class TableStore {
       data = data.reverse(); // 最新消息逆序
       initialData = initialData.reverse(); // 原始消息逆序
     }
-    states.changeData = data.filter((item, index) => {
-      return JSON.stringify(item) !== JSON.stringify(initialData[index]);
-    });
+    states.changeData = data.filter((item, index) => JSON.stringify(item) !== JSON.stringify(initialData[index]));
   }
 
   // undo and recovery

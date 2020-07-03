@@ -29,6 +29,7 @@
         :cellStyle="cellStyle"
         :cellClassName="cellClassName"
         @selection-change="selectionChange"
+        @select="select"
         :rowHeight="28" />
       </div>
     </div>
@@ -344,6 +345,9 @@ export default {
     },
     selectionChange(val) {
       console.log(val);
+    },
+    select(val, column, row) {
+      console.log(val, column, row);
     },
     // cellStyle({ rowIndex, columnIndex }) {
     //   if (rowIndex === 1) {

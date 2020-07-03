@@ -415,7 +415,8 @@ export default {
     },
     // 选择单元格
     selectCell(e, x, y, type) {
-      if (this.disabled) return;
+      // 已修改: 禁止整表操作
+      // if (this.disabled) return;
       if (e.button !== 0) return;
       const { states } = this.store;
       window.addEventListener('keydown', this.keySubmit);
@@ -432,10 +433,15 @@ export default {
       states.selector.selectedXArr = [x, x];
       states.selector.selectedYArr = [y, y];
       states.selector.isSelected = true;
+      if (this.disabled) {
+        states.editor.editing = true;
+        states.editor.editorShow = false;
+      }
       this.$nextTick(() => {
         states.editor.editorXIndex = x;
         states.editor.editorYIndex = y;
         states.editor.curEditorCoverValue = states.showData[states.editor.editorYIndex][states.columns[states.editor.editorXIndex].key];
+        this.$emit('select', states.editor.curEditorCoverValue, states.selector.selectedXIndex, states.selector.selectedYIndex);
         this.$nextTick(() => {
           this.adjustPosition();
           this.$refs.editor.$refs.clipboard.focus();
@@ -456,9 +462,9 @@ export default {
         states.editor.editType = 'text';
         return;
       }
-      if (states.editor.editing || !states.editor.editorShow) {
-        return;
-      }
+      // if (states.editor.editing || !states.editor.editorShow) {
+      //   return;
+      // }
       if ((ctrlKey && keyCode === 67) || (metaKey && keyCode === 67)) {
         return this.getContentToclipboard();
       }
@@ -599,6 +605,7 @@ export default {
     },
     // 设置启用编辑
     setEditing(key) {
+      if (this.disabled) return;
       const { states } = this.store;
       if (states.columns[states.editor.editorXIndex].disabled) {
         return;
