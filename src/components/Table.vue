@@ -462,14 +462,14 @@ export default {
         states.editor.editType = 'text';
         return;
       }
-      // if (states.editor.editing || !states.editor.editorShow) {
-      //   return;
-      // }
       if ((ctrlKey && keyCode === 67) || (metaKey && keyCode === 67)) {
         return this.getContentToclipboard();
       }
       if ((ctrlKey && keyCode === 65) || (metaKey && keyCode === 65)) {
         return this.store.selectAllCells();
+      }
+      if (states.editor.editing || !states.editor.editorShow) {
+        return;
       }
       if (ctrlKey || metaKey) {
         return;

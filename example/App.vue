@@ -40,9 +40,9 @@
 // import axios from 'axios';
 import Mock from 'mockjs';
 import { checkbox } from 'element-ui';
-import ExcelTable from '../src/components/Table.vue';
-// import ExcelTable from '../dist/vue-excel-table.min';
-// import '../dist/vue-excel-table.min.css';
+// import ExcelTable from '../src/components/Table.vue';
+import ExcelTable from '../dist/vue-excel-table.min';
+import '../dist/vue-excel-table.min.css';
 
 export default {
   name: 'App',

@@ -205,8 +205,10 @@ export default {
           if (this.columns[this.editor.editorXIndex].type === 'number') {
             this.limitNumber(this.editContent, true);
           }
-          this.store.getEditorContent(this.editContent);
-          this.editContent = '';
+          if (this.store.states.editor.editorShow) {
+            this.store.getEditorContent(this.editContent);
+            this.editContent = '';
+          }
         }
       },
     },
@@ -226,6 +228,7 @@ export default {
       if (format && isNaN(nVal)) {
         nVal = '';
       }
+      console.log('%c限制输入数字', 'color:red;font-size:16px;text-shadow:1px 1px 1px blue;', nVal);
       this.editContent = nVal;
     },
     setEditing() {

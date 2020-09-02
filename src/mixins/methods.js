@@ -8,6 +8,7 @@ export default {
       this.$nextTick(() => {
         this.initData();
         this.store.handleFilters();
+        this.store.setScrollStatus(0, 0);
       });
     },
     getChangeData() {
