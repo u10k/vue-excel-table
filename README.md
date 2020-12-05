@@ -1,4 +1,5 @@
 # vue-excel-table可编辑的表格组件
+<a href="https://www.npmjs.com/package/vue-excel-table" target="_blank" rel="external"><img src="https://img.shields.io/npm/v/vue-excel-table.svg" style="width: auto; height: auto"></a><a href="https://www.npmjs.com/package/vue-excel-table"><img src="https://img.shields.io/npm/dm/vue-excel-table.svg" style="width: auto; height: auto"></a>
 
 适用于Vue的可编辑的表格组件，支持多种快捷键操作，模拟Excel的操作体验
 
