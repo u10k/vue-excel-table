@@ -5,9 +5,9 @@
 
 ## 截图
 
-![image](http://qby3kwt9i.bkt.clouddn.com/excel-table.gif)
+![image](https://cloud.51peiq.com/excel-table.gif)
 
-![image](http://qby3kwt9i.bkt.clouddn.com/excel-table2.gif)
+![image](https://cloud.51peiq.com/excel-table2.gif)
 
 ## 特性
 
@@ -218,6 +218,9 @@ cellClassName | 单元格的 className 的回调方法 | Function({row, column, 
 事件名称 | 说明 | 回调参数
 ---|---|---
 selection-change | 当选择项发生变化时会触发该事件 | selection
+selection-select | 当选择项发生变化时会触发该事件 | row
+selection-all-page | 当选择'全选所有页'时会触发该事件 | 'All'
+selection-current-page | 当选择'全选当前页'时会触发该事件 | 'Current'
 
 ### 方法
 
@@ -225,6 +228,7 @@ selection-change | 当选择项发生变化时会触发该事件 | selection
 ---|---|---
 getData | 用来获取数据，返回当前表格数据 | ——
 setData | 用来设置数据，并重置历史记录 | data
+selectAll | 用来设置'全选状态' | 'All' or 'Current'
 getChangeData | 获取变化的数据行 | ——
 getErrorRows | 获取校验错误的数据和索引 | ——
 addItem | 添加一行数据 | item, type(默认'push',可选'unshift')

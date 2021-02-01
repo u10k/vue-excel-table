@@ -342,7 +342,7 @@ export default {
       });
       this.$refs.excelTable.setData(data.list, null, 10);
       this.$nextTick(() => {
-        // this.$refs.excelTable.selectAll('Current'); // Current, All
+        this.$refs.excelTable.selectAll('All'); // Current, All
       });
       // axios.get('https://demo.kevinmint.com/1.json').then((res) => {
       //   this.columns = this.columnsData;
