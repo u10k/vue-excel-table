@@ -12,7 +12,7 @@
   >
     <div
       :style="{
-        width: `${store.states.tableWidth}px`,
+        width: `${store.states.tableWidth - 8}px`,
         height: `${showData.length ? showData.length * store.states.rowHeight : 80}px`,
         transform: `translate3d(
           -${fixed ? 0 : store.states.tableBodyLeft}px,
@@ -49,7 +49,7 @@
             v-if="th.type === 'selection' && dataStatusList[yIndex + store.states.visibleRowStartIndex]"
             size="mini"
             v-model="dataStatusList[yIndex + store.states.visibleRowStartIndex].checked"
-            @change="selectionChange"
+            @change="selectionChange(yIndex + store.states.visibleRowStartIndex)"
           ></el-checkbox>
           <div
             v-else
@@ -128,8 +128,8 @@ export default {
     },
   },
   methods: {
-    selectionChange() {
-      this.$parent.selectionChange();
+    selectionChange(index) {
+      this.$parent.selectionChange({ rowIndex: index });
     },
     multiSelect(e, x, y, columnType) {
       this.store.multiSelect(e, x, y, columnType);

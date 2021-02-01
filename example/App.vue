@@ -18,7 +18,8 @@
           </li>
         </ul>
       </div>
-      <div :class="s.excel-table_wrapper">
+<!--      :class="s.excel-table_wrapper"-->
+      <div>
         <excel-table
         ref="excelTable"
         :columns="columns"
@@ -29,6 +30,9 @@
         :cellStyle="cellStyle"
         :cellClassName="cellClassName"
         @selection-change="selectionChange"
+        @selection-select="selectionSelect"
+        @selection-all-page="selectionAllPage"
+        @selection-current-page="selectionCurrentPage"
         @select="select"
         :rowHeight="28" />
       </div>
@@ -40,9 +44,9 @@
 // import axios from 'axios';
 import Mock from 'mockjs';
 import { checkbox } from 'element-ui';
-// import ExcelTable from '../src/components/Table.vue';
-import ExcelTable from '../dist/vue-excel-table.min';
-import '../dist/vue-excel-table.min.css';
+import ExcelTable from '../src/components/Table.vue';
+// import ExcelTable from '../dist/vue-excel-table.min';
+// import '../dist/vue-excel-table.min.css';
 
 export default {
   name: 'App',
@@ -216,56 +220,61 @@ export default {
             },
           ],
         },
-        {
-          title: '月份',
-          key: 'month',
-          type: 'month',
-          width: 100,
-        },
-        {
-          title: '地址',
-          key: 'address',
-          width: 200,
-        },
-        {
-          title: '标题',
-          key: 'title',
-          width: 300,
-        },
-        {
-          title: '内容',
-          key: 'paragraph',
-          width: 300,
-        },
-        {
-          title: '链接',
-          key: 'url',
-          width: 200,
-        },
-        {
-          title: 'ip',
-          key: 'ip',
-          width: 200,
-          validate: (value) => {
-            const pattern = /((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}/g;
-            return pattern.test(value);
-          },
-        },
-        {
-          title: '总金额',
-          key: 'sum',
-          width: 200,
-        },
-        {
-          title: 'ID',
-          key: 'id',
-          width: 200,
-        },
-        {
-          title: '色值',
-          key: 'color',
-          width: 200,
-        },
+        // {
+        //   title: '月份',
+        //   key: 'month',
+        //   type: 'month',
+        //   width: 100,
+        // },
+        // {
+        //   title: '地址',
+        //   key: 'address',
+        //   width: 200,
+        // },
+        // {
+        //   title: '标题',
+        //   key: 'title',
+        //   width: 300,
+        // },
+        // {
+        //   title: '内容',
+        //   key: 'paragraph',
+        //   width: 300,
+        // },
+        // {
+        //   title: '链接',
+        //   key: 'url',
+        //   width: 200,
+        // },
+        // {
+        //   title: 'ip',
+        //   key: 'ip',
+        //   width: 200,
+        //   validate: (value) => {
+        //     const pattern = /((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})(\.((2(5[0-5]|[0-4]\d))|[0-1]?\d{1,2})){3}/g;
+        //     return pattern.test(value);
+        //   },
+        // },
+        // {
+        //   title: '总金额',
+        //   key: 'sum',
+        //   width: 200,
+        // },
+        // {
+        //   title: 'ID',
+        //   key: 'id',
+        //   width: 200,
+        // },
+        // {
+        //   title: '色值',
+        //   key: 'color',
+        //   width: 200,
+        // },
+        // {
+        //   title: ' ',
+        //   key: 'scroll',
+        //   width: 8,
+        // },
       ],
       data: [],
       showIcon: true,
@@ -331,7 +340,10 @@ export default {
           color: '@rgba()',
         }],
       });
-      this.$refs.excelTable.setData(data.list, null, 100);
+      this.$refs.excelTable.setData(data.list, null, 10);
+      this.$nextTick(() => {
+        // this.$refs.excelTable.selectAll('Current'); // Current, All
+      });
       // axios.get('https://demo.kevinmint.com/1.json').then((res) => {
       //   this.columns = this.columnsData;
       //   this.$refs.excelTable.setData(res.data.list);
@@ -345,6 +357,15 @@ export default {
     },
     selectionChange(val) {
       console.log(val);
+    },
+    selectionSelect(val) {
+      console.log(val);
+    },
+    selectionAllPage(type) {
+      console.log('%cselectionAllPage', 'color:red;font-size:16px;text-shadow:1px 1px 1px blue;', type);
+    },
+    selectionCurrentPage(type) {
+      console.log('%cselectionCurrentPage', 'color:red;font-size:16px;text-shadow:1px 1px 1px blue;', type);
     },
     select(val, column, row) {
       console.log(val, column, row);

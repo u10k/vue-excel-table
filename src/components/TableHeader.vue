@@ -31,12 +31,35 @@
         :title="th.title"
         v-show="th.fixed || allShow"
       >
-        <el-checkbox
-          v-if="th.type === 'selection'"
-          size="mini"
-          v-model="checkedAll"
-          @change="selectAll"
-        ></el-checkbox>
+<!--        <el-checkbox-->
+<!--          v-if="th.type === 'selection'"-->
+<!--          size="mini"-->
+<!--          v-model="checkedAll"-->
+<!--          @change="selectAll"-->
+<!--        ></el-checkbox>-->
+        <el-dropdown v-if="th.type === 'selection'">
+          <span class="el-dropdown-link">
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>
+              <el-checkbox
+                v-if="th.type === 'selection'"
+                size="mini"
+                v-model="checkedCurrent"
+                @change="selectAll('Current')"
+              >全选当前页</el-checkbox>
+            </el-dropdown-item>
+            <el-dropdown-item>
+              <el-checkbox
+                v-if="th.type === 'selection'"
+                size="mini"
+                v-model="checkedAll"
+                @change="selectAll('All')"
+              >全选所有页</el-checkbox>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
         <p
           class="ww-title"
           :style="{ width: `${columnsWidth[index] - 20}px` }"
@@ -64,11 +87,19 @@
 </template>
 
 <script>
-import { checkbox } from 'element-ui';
+import {
+  Checkbox,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+} from 'element-ui';
 
 export default {
   components: {
-    'el-checkbox': checkbox,
+    'el-checkbox': Checkbox,
+    'el-dropdown': Dropdown,
+    'el-dropdown-menu': DropdownMenu,
+    'el-dropdown-item': DropdownItem,
   },
   props: {
     fixed: {
@@ -91,6 +122,7 @@ export default {
   },
   data() {
     return {
+      checkedCurrent: false,
       checkedAll: false,
       adjustWidthValue: 80,
       adjustWidthFlag: false,
@@ -114,8 +146,24 @@ export default {
     },
   },
   methods: {
-    selectAll() {
-      this.$parent.selectAll();
+    selectAll(type) {
+      this.$parent.selectAll(type);
+      const { states } = this.store;
+      const checkedAll = states.dataStatusList.every((item) => item.checked);
+      this.$nextTick(() => {
+        if (checkedAll) {
+          if (type === 'All') {
+            this.checkedAll = true;
+            this.checkedCurrent = true;
+          } else {
+            this.checkedAll = false;
+            this.checkedCurrent = true;
+          }
+        } else {
+          this.checkedAll = false;
+          this.checkedCurrent = false;
+        }
+      });
     },
     handlerDown(index) {
       this.adjustWidthFlag = true;

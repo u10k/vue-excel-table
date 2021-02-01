@@ -228,7 +228,6 @@ export default {
       if (format && isNaN(nVal)) {
         nVal = '';
       }
-      console.log('%c限制输入数字', 'color:red;font-size:16px;text-shadow:1px 1px 1px blue;', nVal);
       this.editContent = nVal;
     },
     setEditing() {

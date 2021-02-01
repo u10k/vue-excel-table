@@ -287,7 +287,13 @@ export default {
         }
         return { ...item };
       });
-      this.columnsWidth = states.columns.map((item) => item.width);
+      this.columnsWidth = states.columns.map((item, index) => {
+        if (states.columns.length === index + 1) {
+          console.log('%citem', 'color:red;font-size:16px;text-shadow:1px 1px 1px blue;', item);
+          return item.width - 8;
+        }
+        return item.width;
+      });
       states.columnsStatusList = states.columns.map((item) => ({
         key: item.key,
         type: item.type,
@@ -309,9 +315,11 @@ export default {
       states.historyData = [JSON.stringify(states.data)];
       states.curHisory = 1;
       if (this.$refs.theader) {
+        this.$refs.theader.checkedCurrent = false;
         this.$refs.theader.checkedAll = false;
       }
       if (this.$refs.fixedTheader) {
+        this.$refs.fixedTheader.checkedCurrent = false;
         this.$refs.fixedTheader.checkedAll = false;
       }
       this.initColumns();
@@ -723,13 +731,13 @@ export default {
         window.removeEventListener('mousemove', this.multiSelectAdjustPostion);
       }
     },
-    selectAll() {
+    selectAll(type) {
       const { states } = this.store;
       const checkedAll = states.dataStatusList.every((item) => item.checked);
       states.dataStatusList.forEach((item, index) => {
         this.$set(states.dataStatusList[index], 'checked', !checkedAll);
       });
-      this.selectionChange();
+      this.selectionChange({ type });
     },
     adjustWidth(index, width) {
       this.store.states.columns[index].width = width;
