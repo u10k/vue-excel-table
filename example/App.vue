@@ -361,11 +361,11 @@ export default {
     selectionSelect(val) {
       console.log(val);
     },
-    selectionAllPage(type) {
-      console.log('%cselectionAllPage', 'color:red;font-size:16px;text-shadow:1px 1px 1px blue;', type);
+    selectionAllPage(status) {
+      console.log('%cselectionAllPage', 'color:red;font-size:16px;text-shadow:1px 1px 1px blue;', status);
     },
-    selectionCurrentPage(type) {
-      console.log('%cselectionCurrentPage', 'color:red;font-size:16px;text-shadow:1px 1px 1px blue;', type);
+    selectionCurrentPage(status) {
+      console.log('%cselectionCurrentPage', 'color:red;font-size:16px;text-shadow:1px 1px 1px blue;', status);
     },
     select(val, column, row) {
       console.log(val, column, row);

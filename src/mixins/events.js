@@ -10,9 +10,9 @@ export default {
         this.$emit('selection-select', row);
       }
       if (type === 'Current') {
-        this.$emit('selection-current-page', type);
+        this.$emit('selection-current-page', selection.length !== 0);
       } else if (type === 'All') {
-        this.$emit('selection-all-page', type);
+        this.$emit('selection-all-page', selection.length !== 0);
       }
       const checkedAll = states.dataStatusList.every((item) => item.checked);
       if (checkedAll) {

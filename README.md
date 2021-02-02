@@ -219,8 +219,8 @@ cellClassName | 单元格的 className 的回调方法 | Function({row, column, 
 ---|---|---
 selection-change | 当选择项发生变化时会触发该事件 | selection
 selection-select | 当选择项发生变化时会触发该事件 | row
-selection-all-page | 当选择'全选所有页'时会触发该事件 | 'All'
-selection-current-page | 当选择'全选当前页'时会触发该事件 | 'Current'
+selection-all-page | 当选择'全选所有页'时会触发该事件 | true or false
+selection-current-page | 当选择'全选当前页'时会触发该事件 |  true or false
 
 ### 方法
 
