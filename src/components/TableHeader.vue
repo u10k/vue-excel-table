@@ -47,7 +47,7 @@
                 v-if="th.type === 'selection'"
                 size="mini"
                 v-model="checkedCurrent"
-                @change="selectAll('Current')"
+                @change="selectCurrent()"
               >全选当前页</el-checkbox>
             </el-dropdown-item>
             <el-dropdown-item>
@@ -55,7 +55,7 @@
                 v-if="th.type === 'selection'"
                 size="mini"
                 v-model="checkedAll"
-                @change="selectAll('All')"
+                @change="selectAll()"
               >全选所有页</el-checkbox>
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -146,22 +146,25 @@ export default {
     },
   },
   methods: {
-    selectAll(type) {
-      this.$parent.selectAll(type);
-      const { states } = this.store;
-      const checkedAll = states.dataStatusList.every((item) => item.checked);
+    selectAll() {
+      this.$parent.selectAll('All');
       this.$nextTick(() => {
-        if (checkedAll) {
-          if (type === 'All') {
-            this.checkedAll = true;
-            this.checkedCurrent = true;
-          } else {
-            this.checkedAll = false;
-            this.checkedCurrent = true;
-          }
-        } else {
-          this.checkedAll = false;
+        if (this.checkedAll === true && this.checkedCurrent === true) {
+          this.$parent.selectAll('All');
           this.checkedCurrent = false;
+        } else if (this.checkedAll === true) {
+          this.checkedCurrent = false;
+        }
+      });
+    },
+    selectCurrent() {
+      this.$parent.selectAll('Current');
+      this.$nextTick(() => {
+        if (this.checkedCurrent === true && this.checkedAll === true) {
+          this.$parent.selectAll('Current');
+          this.checkedAll = false;
+        } else if (this.checkedCurrent === true) {
+          this.checkedAll = false;
         }
       });
     },

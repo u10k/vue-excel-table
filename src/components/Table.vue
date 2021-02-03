@@ -287,13 +287,7 @@ export default {
         }
         return { ...item };
       });
-      this.columnsWidth = states.columns.map((item, index) => {
-        if (states.columns.length === index + 1) {
-          console.log('%citem', 'color:red;font-size:16px;text-shadow:1px 1px 1px blue;', item);
-          return item.width - 8;
-        }
-        return item.width;
-      });
+      this.columnsWidth = states.columns.map((item) => item.width);
       states.columnsStatusList = states.columns.map((item) => ({
         key: item.key,
         type: item.type,

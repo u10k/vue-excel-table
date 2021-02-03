@@ -342,7 +342,7 @@ export default {
       });
       this.$refs.excelTable.setData(data.list, null, 10);
       this.$nextTick(() => {
-        this.$refs.excelTable.selectAll('All'); // Current, All
+        // this.$refs.excelTable.selectAll('All'); // Current, All
       });
       // axios.get('https://demo.kevinmint.com/1.json').then((res) => {
       //   this.columns = this.columnsData;
@@ -359,7 +359,14 @@ export default {
       console.log(val);
     },
     selectionSelect(val) {
-      console.log(val);
+      console.log('%cselectionSelect', 'color:red;font-size:16px;text-shadow:1px 1px 1px blue;', val);
+      this.$nextTick(() => {
+        console.log('%cthis.$refs.excelTable', 'color:red;font-size:16px;text-shadow:1px 1px 1px blue;', this.$refs.excelTable.theaderType);
+        if(this.$refs.excelTable.theaderType === 'All') {
+          this.$refs.excelTable.selectAll('All');
+        }
+        // this.$refs.excelTable.selectAll('All');
+      });
     },
     selectionAllPage(status) {
       console.log('%cselectionAllPage', 'color:red;font-size:16px;text-shadow:1px 1px 1px blue;', status);
